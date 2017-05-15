@@ -8,13 +8,13 @@ import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.finer.components.MentionDetecter;
 import edu.illinois.cs.cogcomp.finer.components.TriggerWordDetecter;
 import edu.illinois.cs.cogcomp.finer.components.TriggerWordFilter;
-import edu.illinois.cs.cogcomp.finer.components.filters.MaxDistanceFilter;
-import edu.illinois.cs.cogcomp.finer.components.filters.QuotationFilter;
-import edu.illinois.cs.cogcomp.finer.components.filters.TypeFilter;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters.MaxDistanceFilter;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters.QuotationFilter;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters.TypeFilter;
 import edu.illinois.cs.cogcomp.finer.components.mention.BasicMentionDetection;
-import edu.illinois.cs.cogcomp.finer.components.pruner
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.pruner
         .SingleNearestTriggerPruner;
-import edu.illinois.cs.cogcomp.finer.components.trigger
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.trigger
         .BasicTriggerWordDetecter;
 import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
 import net.sf.extjwnl.data.Synset;

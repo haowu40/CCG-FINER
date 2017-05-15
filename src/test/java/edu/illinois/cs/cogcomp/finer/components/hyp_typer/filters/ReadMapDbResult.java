@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.finer.components.filters;
+package edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters;
 
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.SerializationHelper;
@@ -6,8 +6,6 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
-
-import java.awt.*;
 
 import static edu.illinois.cs.cogcomp.finer.entry.AnnotationFiles.decompress;
 

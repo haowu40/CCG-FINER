@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.finer.components.filters;
+package edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters;
 
 import org.junit.Test;
 
