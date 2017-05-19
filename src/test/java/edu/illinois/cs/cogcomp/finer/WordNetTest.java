@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp;
+package edu.illinois.cs.cogcomp.finer;
 
 import net.sf.extjwnl.JWNLException;
 import net.sf.extjwnl.data.IndexWord;

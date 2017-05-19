@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp;
+package edu.illinois.cs.cogcomp.finer;
 
 import edu.illinois.cs.cogcomp.nlp.tokenizer.StatefulTokenizer;
 import edu.illinois.cs.cogcomp.nlp.tokenizer.Tokenizer;

@@ -2,22 +2,57 @@ package edu.illinois.cs.cogcomp.finer.types;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by haowu4 on 5/15/17.
  */
 public class FinerType {
-    private TypingSystem typingSystem;
+    private TypeSystem typeSystem;
     private String type;
     private FinerType parent;
     private List<FinerType> children;
+    private List<String> wordnetIds;
 
-    FinerType(TypingSystem typingSystem, String type, FinerType parent, List<FinerType> children) {
-        this.typingSystem = typingSystem;
+    FinerType(String name) {
+        this.typeSystem = null;
+        this.type = name;
+        this.parent = null;
+        this.children = new ArrayList<>();
+        this.wordnetIds = new ArrayList<>();
+    }
+
+    public TypeSystem getTypeSystem() {
+        return typeSystem;
+    }
+
+    public void setTypeSystem(TypeSystem typeSystem) {
+        this.typeSystem = typeSystem;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public FinerType getParent() {
+        return parent;
+    }
+
+    public void setParent(FinerType parent) {
         this.parent = parent;
-        this.children = children;
+    }
+
+    public List<FinerType> getChildren() {
+        return children;
+    }
+
+    public void addChildren(FinerType child) {
+        this.children.add(child);
     }
 
     public boolean isParentOf(FinerType t) {
@@ -29,11 +64,15 @@ public class FinerType {
     }
 
     public boolean isCoarseType(FinerType t) {
-        throw new NotImplementedException();
+        return this.parent == null;
     }
 
     public List<String> wordNetSenseIds() {
-        throw new NotImplementedException();
+        return this.wordnetIds;
+    }
+
+    public void addWordNetSenseId(String senseId) {
+        this.wordnetIds.add(senseId);
     }
 
 

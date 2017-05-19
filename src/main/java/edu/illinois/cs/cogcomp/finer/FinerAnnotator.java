@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * Created by haowu4 on 1/15/17.
  */
 public class FinerAnnotator extends Annotator {
-    private MentionDetecter mentionDetecter = new BasicMentionDetection();
+    private MentionDetecter mentionDetecter = new BasicMentionDetection(null);
     private TriggerWordDetecter triggerWordDetecter = new
             BasicTriggerWordDetecter();
     private List<TriggerWordFilter> triggerWordFilters = Arrays.asList(
@@ -84,30 +84,30 @@ public class FinerAnnotator extends Annotator {
                 finer.addConstituent(c);
             }
 
-            List<Constituent> mentions = mentionDetecter.getMentionCandidates
-                    (s);
-
-            for (Constituent c : mentions) {
-                c.addAttribute("type", "mention");
-                finer.addConstituent(c);
-            }
-
-            List<Pair<Constituent, Constituent>> relations = new ArrayList<>();
-
-            for (final Constituent mention : mentions) {
-                List<Constituent> survivedTriggerWords = triggers.stream()
-                        .filter(trigger -> triggerWordFilters.stream()
-                                .allMatch(f -> f.filterTriggerWord(s,
-                                        trigger, mention)))
-                        .collect(Collectors.toList());
-                for (Constituent trigger : survivedTriggerWords) {
-                    relations.add(new Pair<>(mention, trigger));
-                }
-            }
-
-            for (Relation r : pruner.pruneRelations(relations)) {
-                finer.addRelation(r);
-            }
+//            List<Constituent> mentions = mentionDetecter.getMentionCandidates
+//                    (s);
+//
+//            for (Constituent c : mentions) {
+//                c.addAttribute("type", "mention");
+//                finer.addConstituent(c);
+//            }
+//
+//            List<Pair<Constituent, Constituent>> relations = new ArrayList<>();
+//
+//            for (final Constituent mention : mentions) {
+//                List<Constituent> survivedTriggerWords = triggers.stream()
+//                        .filter(trigger -> triggerWordFilters.stream()
+//                                .allMatch(f -> f.filterTriggerWord(s,
+//                                        trigger, mention)))
+//                        .collect(Collectors.toList());
+//                for (Constituent trigger : survivedTriggerWords) {
+//                    relations.add(new Pair<>(mention, trigger));
+//                }
+//            }
+//
+//            for (Relation r : pruner.pruneRelations(relations)) {
+//                finer.addRelation(r);
+//            }
         }
         return finer;
     }

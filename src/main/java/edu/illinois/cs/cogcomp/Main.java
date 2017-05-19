@@ -61,7 +61,7 @@ public class Main {
         props.setProperty(PipelineConfigurator.USE_NER_CONLL.key,
                 Configurator.TRUE);
         props.setProperty(PipelineConfigurator.USE_NER_ONTONOTES.key,
-                Configurator.FALSE);
+                Configurator.TRUE);
         props.setProperty(PipelineConfigurator.USE_STANFORD_PARSE.key,
                 Configurator.FALSE);
         props.setProperty(PipelineConfigurator.USE_STANFORD_DEP.key,
@@ -117,8 +117,8 @@ public class Main {
             TextAnnotation ta = processor.createAnnotatedTextAnnotation("",
                     "", line);
 
-            visualizeView(ta, ViewNames.SHALLOW_PARSE);
-            visualizeView(ta, ViewNames.NER_CONLL);
+//            visualizeView(ta, ViewNames.SHALLOW_PARSE);
+//            visualizeView(ta, ViewNames.NER_CONLL);
             visualizeView(ta, ViewNames.NER_ONTONOTES);
         }
 

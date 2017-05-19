@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.util;
+package edu.illinois.cs.cogcomp.finer.utils;
 
 import java.io.*;
 

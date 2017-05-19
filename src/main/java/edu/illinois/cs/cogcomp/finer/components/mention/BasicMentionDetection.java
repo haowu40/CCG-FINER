@@ -7,6 +7,8 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation.View;
 import edu.illinois.cs.cogcomp.finer.components.MentionDetecter;
 import edu.illinois.cs.cogcomp.finer.datastructure.BaseTypes;
 import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
+import edu.illinois.cs.cogcomp.finer.datastructure.FineTypeConstituent;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,35 +17,23 @@ import java.util.List;
  * Created by haowu4 on 1/15/17.
  */
 public class BasicMentionDetection implements MentionDetecter {
-    public static String getLabel(String conllTypeString) {
-        if (conllTypeString.equals("PER")) {
-            return "person";
-        }
+    TypeMapper mapper;
 
-        if (conllTypeString.equals("ORG")) {
-            return "organization";
-        }
-
-        if (conllTypeString.equals("LOC")) {
-            return "location";
-        }
-
-        if (conllTypeString.equals("MISC")) {
-            return "other";
-        }
-
-        throw new RuntimeException("Unknown types : " + conllTypeString);
+    public BasicMentionDetection(TypeMapper mapper) {
+        this.mapper = mapper;
     }
 
     @Override
-    public List<Constituent> getMentionCandidates(Sentence sentence) {
-        List<Constituent> ret = new ArrayList<>();
-        View ner = sentence.getView(ViewNames.NER_CONLL);
+    public List<FineTypeConstituent> getMentionCandidates(Sentence sentence) {
+        List<FineTypeConstituent> ret = new ArrayList<>();
+        View ner = sentence.getView(ViewNames.NER_ONTONOTES);
         for (Constituent c : ner.getConstituents()) {
-            Constituent mention = new Constituent("mention", "finer-mention", c
+            FineTypeConstituent mention = new FineTypeConstituent("mention", "finer-mention", c
                     .getTextAnnotation
                             (), c.getStartSpan(), c.getEndSpan());
-            mention.addAttribute("coarse-type", getLabel(c.getLabel()));
+            String typeName = mapper.getType(c.getLabel()).toString();
+            mention.getLabelsToScores().put(typeName, 1.0);
+            mention.addReason(typeName, this.getClass());
             ret.add(mention);
         }
         return ret;

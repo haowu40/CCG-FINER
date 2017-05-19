@@ -9,4 +9,10 @@ public class FinerConfiguration {
     private String aliasDBPath;
     private String wordVectorPath;
 
+    private boolean useKBBiasTyper;
+    private boolean usePatternTyper;
+    private boolean useHyponymTyper;
+
+
+
 }

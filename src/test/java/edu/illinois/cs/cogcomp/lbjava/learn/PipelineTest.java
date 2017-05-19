@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp;
+package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorServiceConfigurator;
@@ -6,18 +6,21 @@ import edu.illinois.cs.cogcomp.annotation.BasicAnnotatorService;
 import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation
         .TextAnnotation;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.OVector;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.Configurator;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
+import edu.illinois.cs.cogcomp.finer.ner_test.NERAnnotatorPub;
+import edu.illinois.cs.cogcomp.lbjava.learn.SparseAveragedPerceptron;
+import edu.illinois.cs.cogcomp.ner.NERAnnotator;
 import edu.illinois.cs.cogcomp.pipeline.main.PipelineFactory;
 import edu.illinois.cs.cogcomp.wsd.annotators.WordSenseAnnotator;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 
 /**
@@ -81,39 +84,25 @@ public class PipelineTest {
 
     public static void main(String[] args) throws IOException,
             AnnotatorException {
-        String file = "/home/haowu4/data/1blm/text/train/news" +
-                ".en-00001-of-00100";
-        int limit = 20000;
-        List<String> texts = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            int counter = 0;
-            StringBuffer stringBuffer = new StringBuffer();
-            while ((line = br.readLine()) != null) {
-                counter++;
-                if (counter == limit) break;
-                stringBuffer.append(line);
-                stringBuffer.append("\n");
-                if (counter % 100 == 0) {
-                    texts.add(stringBuffer.toString());
-                    stringBuffer = new StringBuffer();
+//        BasicAnnotatorService bas = getPipeline();
+        NERAnnotatorPub co = new NERAnnotatorPub(ViewNames.NER_CONLL);
+        co.initialize(new ResourceManager(new Properties()));
+        OVector ov = co.t1.getNetwork();
+        for (int i = 0; i < ov.size(); i++) {
+            SparseAveragedPerceptron svp = (SparseAveragedPerceptron) ov.get(i);
+            double[] d = svp.awv.averagedWeights.toArray();
+            ;
+            try (PrintWriter out = new PrintWriter("/tmp/" + i + ".txt")) {
+                for (double v : d) {
+                    out.write(String.valueOf(v));
+                    out.write("\n");
                 }
             }
+
+
         }
+        System.out.println(ov.size());
 
-
-        List<TextAnnotation> tas = new ArrayList<>();
-        BasicAnnotatorService bas = getPipeline();
-        System.out.println("Starting it... ");
-        long curr = System.currentTimeMillis();
-        for (String l : texts) {
-            TextAnnotation ta = bas.createAnnotatedTextAnnotation("", "", l);
-            tas.add(ta);
-        }
-        long end = System.currentTimeMillis();
-
-        System.out.println(end - curr);
-        System.out.println(tas.get(tas.size() - 6));
     }
 }

@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp;
+package edu.illinois.cs.cogcomp.finer;
 
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.annotation.BasicAnnotatorService;

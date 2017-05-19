@@ -8,7 +8,6 @@ import edu.illinois.cs.cogcomp.core.utilities.configuration.Configurator;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
 import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
 import edu.illinois.cs.cogcomp.pipeline.main.PipelineFactory;
-import edu.illinois.cs.cogcomp.wsd.annotators.WordSenseAnnotator;
 import net.sf.extjwnl.JWNLException;
 import net.sf.extjwnl.data.Synset;
 import org.apache.commons.io.FileUtils;
