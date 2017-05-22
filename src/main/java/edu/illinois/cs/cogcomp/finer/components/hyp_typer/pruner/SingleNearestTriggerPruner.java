@@ -3,7 +3,7 @@ package edu.illinois.cs.cogcomp.finer.components.hyp_typer.pruner;
 import edu.illinois.cs.cogcomp.core.datastructures.Pair;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Relation;
-import edu.illinois.cs.cogcomp.finer.TriggerMentionPruner;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.TriggerMentionPruner;
 
 import java.util.*;
 

@@ -3,8 +3,8 @@ package edu.illinois.cs.cogcomp.finer.components;
 import edu.illinois.cs.cogcomp.finer.FinerAnnotator;
 import edu.illinois.cs.cogcomp.finer.components.pattern_typer.SimplePattern;
 import edu.illinois.cs.cogcomp.finer.config.FinerConfiguration;
-import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
-import edu.illinois.cs.cogcomp.finer.types.TypeSystem;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.TypeSystem;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
@@ -44,8 +44,8 @@ public class FinerTyperFactory {
     private TypeSystem typeSystem = null;
     private MentionDetecter mentionDetecter = null;
 
-    Map<String, List<FineNerType>> KBBiasDB;
-    Map<SimplePattern, List<FineNerType>> patternDB;
+    Map<String, List<FinerType>> KBBiasDB;
+    Map<SimplePattern, List<FinerType>> patternDB;
 
     private List<IFinerTyper> typers = null;
 

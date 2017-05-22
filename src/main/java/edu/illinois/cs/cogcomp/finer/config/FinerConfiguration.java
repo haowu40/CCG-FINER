@@ -12,7 +12,4 @@ public class FinerConfiguration {
     private boolean useKBBiasTyper;
     private boolean usePatternTyper;
     private boolean useHyponymTyper;
-
-
-
 }

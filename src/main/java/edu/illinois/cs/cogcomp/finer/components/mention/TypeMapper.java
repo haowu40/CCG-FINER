@@ -1,7 +1,7 @@
 package edu.illinois.cs.cogcomp.finer.components.mention;
 
-import edu.illinois.cs.cogcomp.finer.types.FinerType;
-import edu.illinois.cs.cogcomp.finer.types.TypeSystem;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.TypeSystem;
 
 import java.util.Map;
 

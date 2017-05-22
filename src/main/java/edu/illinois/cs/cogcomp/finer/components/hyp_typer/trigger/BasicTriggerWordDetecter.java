@@ -3,7 +3,7 @@ package edu.illinois.cs.cogcomp.finer.components.hyp_typer.trigger;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Sentence;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.View;
-import edu.illinois.cs.cogcomp.finer.components.TriggerWordDetecter;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.TriggerWordDetecter;
 import edu.illinois.cs.cogcomp.finer.utils.WordNetUtils;
 import net.sf.extjwnl.JWNLException;
 import net.sf.extjwnl.data.Synset;

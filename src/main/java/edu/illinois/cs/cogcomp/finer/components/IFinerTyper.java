@@ -1,8 +1,8 @@
 package edu.illinois.cs.cogcomp.finer.components;
 
-import edu.illinois.cs.cogcomp.core.datastructures.Pair;
-import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
-import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Sentence;
+import edu.illinois.cs.cogcomp.finer.datastructure.FineTypeConstituent;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import java.util.List;
  * Created by haowu4 on 5/15/17.
  */
 public interface IFinerTyper {
-    List<Pair<Constituent, List<FineNerType>>> annotate(List<Constituent> mentions);
+    void annotate(List<FineTypeConstituent> mentions, FinerType coarseType, Sentence sentence);
 }

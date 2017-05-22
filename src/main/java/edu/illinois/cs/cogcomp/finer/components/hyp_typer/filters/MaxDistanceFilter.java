@@ -2,7 +2,7 @@ package edu.illinois.cs.cogcomp.finer.components.hyp_typer.filters;
 
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Sentence;
-import edu.illinois.cs.cogcomp.finer.components.TriggerWordFilter;
+import edu.illinois.cs.cogcomp.finer.components.hyp_typer.TriggerWordFilter;
 
 /**
  * Created by haowu4 on 1/15/17.

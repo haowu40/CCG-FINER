@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.finer.components;
+package edu.illinois.cs.cogcomp.finer.components.hyp_typer;
 
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Sentence;

@@ -3,19 +3,10 @@ package edu.illinois.cs.cogcomp.finer.utils;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorException;
 import edu.illinois.cs.cogcomp.annotation.AnnotatorServiceConfigurator;
 import edu.illinois.cs.cogcomp.annotation.BasicAnnotatorService;
-import edu.illinois.cs.cogcomp.core.datastructures.ViewNames;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.Configurator;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
-import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
 import edu.illinois.cs.cogcomp.pipeline.main.PipelineFactory;
-import net.sf.extjwnl.JWNLException;
-import net.sf.extjwnl.data.Synset;
-import org.apache.commons.io.FileUtils;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -118,20 +109,20 @@ public class PipelineUtils {
         return processor;
     }
 
-    public static List<FineNerType> readFinerTypes(String file) throws IOException, JWNLException {
-        List<FineNerType> types = new ArrayList<>();
-        List<String> typeStrs = FileUtils.readLines(new File(file));
-        for (String s : typeStrs) {
-            String[] parts = s.split("\\t");
-            String typName = parts[0];
-            String[] senseNames = parts[1].split(" ");
-            List<Synset> synsets = new ArrayList<>();
-            for (String sense : senseNames) {
-                synsets.add(WordNetUtils.getInstance().getSynsetOfNoun(sense));
-            }
-            types.add(new FineNerType(typName, synsets));
-        }
-        return types;
-    }
+//    public static List<FineNerType> readFinerTypes(String file) throws IOException, JWNLException {
+//        List<FineNerType> types = new ArrayList<>();
+//        List<String> typeStrs = FileUtils.readLines(new File(file));
+//        for (String s : typeStrs) {
+//            String[] parts = s.split("\\t");
+//            String typName = parts[0];
+//            String[] senseNames = parts[1].split(" ");
+//            List<Synset> synsets = new ArrayList<>();
+//            for (String sense : senseNames) {
+//                synsets.add(WordNetUtils.getInstance().getSynsetOfNoun(sense));
+//            }
+//            types.add(new FineNerType(typName, synsets));
+//        }
+//        return types;
+//    }
 
 }

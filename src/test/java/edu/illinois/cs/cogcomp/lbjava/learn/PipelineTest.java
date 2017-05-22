@@ -86,6 +86,7 @@ public class PipelineTest {
             AnnotatorException {
 
 //        BasicAnnotatorService bas = getPipeline();
+        String x = "This is a long sentences";
         NERAnnotatorPub co = new NERAnnotatorPub(ViewNames.NER_CONLL);
         co.initialize(new ResourceManager(new Properties()));
         OVector ov = co.t1.getNetwork();
