@@ -42,7 +42,6 @@ public class SimpleKBBiasTyper implements IFinerTyper {
                 AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
                 mention.addReason(typeName, reason);
             }
-
         }
 
     }
