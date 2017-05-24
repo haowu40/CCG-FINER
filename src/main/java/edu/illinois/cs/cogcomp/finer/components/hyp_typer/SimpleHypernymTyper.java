@@ -31,11 +31,10 @@ public class SimpleHypernymTyper implements IFinerTyper {
         } catch (JWNLException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public void annotateOneMention(FineTypeConstituent mention, FinerType coarseType, Sentence sentence) throws JWNLException {
+    public void annotateOneMention(FineTypeConstituent mention, Sentence sentence) throws JWNLException {
+        FinerType coarseType = mention.getCoarseType();
         int start = mention.getStartSpan();
         int end = mention.getEndSpan();
         if (start > 0) {
@@ -66,10 +65,10 @@ public class SimpleHypernymTyper implements IFinerTyper {
     }
 
     @Override
-    public void annotate(List<FineTypeConstituent> mentions, FinerType coarseType, Sentence sentence) {
+    public void annotate(List<FineTypeConstituent> mentions, Sentence sentence) {
         for (FineTypeConstituent m : mentions) {
             try {
-                annotateOneMention(m, coarseType, sentence);
+                annotateOneMention(m, sentence);
             } catch (Exception e) {
                 e.printStackTrace();
             }

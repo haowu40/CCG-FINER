@@ -33,7 +33,7 @@ public class SimpleKBBiasTyper implements IFinerTyper {
     }
 
     @Override
-    public void annotate(List<FineTypeConstituent> mentions, FinerType coarseType, Sentence sentence) {
+    public void annotate(List<FineTypeConstituent> mentions, Sentence sentence) {
         for (FineTypeConstituent mention : mentions) {
             List<FinerType> annotated = annotateSingleMention(mention, sentence);
             for (FinerType t : annotated) {

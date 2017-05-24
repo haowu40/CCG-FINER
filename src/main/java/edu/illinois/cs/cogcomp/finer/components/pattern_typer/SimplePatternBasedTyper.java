@@ -38,7 +38,8 @@ public class SimplePatternBasedTyper implements IFinerTyper {
         return ret;
     }
 
-    public void annotateOneMention(FineTypeConstituent c, FinerType coarseType) {
+    public void annotateOneMention(FineTypeConstituent c) {
+        FinerType coarseType = c.getCoarseType();
         int start = c.getStartSpan();
         int end = c.getEndSpan();
         String[] surface = new String[end - start];
@@ -62,9 +63,9 @@ public class SimplePatternBasedTyper implements IFinerTyper {
     }
 
     @Override
-    public void annotate(List<FineTypeConstituent> mentions, FinerType coarseType, Sentence sentence) {
+    public void annotate(List<FineTypeConstituent> mentions, Sentence sentence) {
         for (FineTypeConstituent mention : mentions) {
-            annotateOneMention(mention, coarseType);
+            annotateOneMention(mention);
         }
     }
 }

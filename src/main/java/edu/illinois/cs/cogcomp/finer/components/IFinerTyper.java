@@ -10,5 +10,5 @@ import java.util.List;
  * Created by haowu4 on 5/15/17.
  */
 public interface IFinerTyper {
-    void annotate(List<FineTypeConstituent> mentions, FinerType coarseType, Sentence sentence);
+    void annotate(List<FineTypeConstituent> mentions, Sentence sentence);
 }

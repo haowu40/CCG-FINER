@@ -14,6 +14,7 @@ import java.util.Map;
  */
 public class FineTypeConstituent extends Constituent {
 
+    private FinerType coarseType;
 
     public FineTypeConstituent(String label, String viewName, TextAnnotation text, int start, int end) {
         super(label, viewName, text, start, end);
@@ -43,4 +44,15 @@ public class FineTypeConstituent extends Constituent {
         }
     }
 
+    public void addCoarseType(FinerType t) {
+        if (t.isVisible()) {
+            this.labelsToScores.put(t.getType(), 1.0);
+        }
+        this.coarseType = t;
+    }
+
+
+    public FinerType getCoarseType() {
+        return coarseType;
+    }
 }

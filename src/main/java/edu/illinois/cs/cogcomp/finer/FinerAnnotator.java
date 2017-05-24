@@ -53,7 +53,7 @@ public class FinerAnnotator extends Annotator {
             Sentence sent = ta.getSentence(i);
             List<FineTypeConstituent> sentence_candidates = mentionDetecter.getMentionCandidates(sent);
             for (IFinerTyper typer : this.typers) {
-//                typer.annotate(sentence_candidates, , sent);
+                typer.annotate(sentence_candidates, sent);
             }
         }
         return allCandidates;
