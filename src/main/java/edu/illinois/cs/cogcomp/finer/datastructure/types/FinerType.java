@@ -1,6 +1,6 @@
-package edu.illinois.cs.cogcomp.finer.types;
+package edu.illinois.cs.cogcomp.finer.datastructure.types;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.sf.extjwnl.data.Synset;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,26 @@ import java.util.List;
 public class FinerType {
     private TypeSystem typeSystem;
     private String type;
+    private boolean isVisible;
     private FinerType parent;
     private List<FinerType> children;
-    private List<String> wordnetIds;
+    private List<Synset> wordnetIds;
 
-    FinerType(String name) {
+    FinerType(String name, boolean isVisible) {
         this.typeSystem = null;
         this.type = name;
+        this.isVisible = isVisible;
         this.parent = null;
         this.children = new ArrayList<>();
         this.wordnetIds = new ArrayList<>();
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
     }
 
     public TypeSystem getTypeSystem() {
@@ -56,22 +66,44 @@ public class FinerType {
     }
 
     public boolean isParentOf(FinerType t) {
-        throw new NotImplementedException();
+        FinerType it = t.parent;
+        while (it != null) {
+            if (it.equals(this)) {
+                return true;
+            }
+            it = t.parent;
+        }
+        return false;
+    }
+
+    public boolean isParentOfOrEqual(FinerType t) {
+        FinerType it = t;
+        while (it != null) {
+            if (it.equals(this)) {
+                return true;
+            }
+            it = t.parent;
+        }
+        return false;
     }
 
     public boolean isChildOf(FinerType t) {
-        throw new NotImplementedException();
+        return t.isParentOf(this);
+    }
+
+    public boolean isChildOfOrEqual(FinerType t) {
+        return t.isParentOfOrEqual(this);
     }
 
     public boolean isCoarseType(FinerType t) {
         return this.parent == null;
     }
 
-    public List<String> wordNetSenseIds() {
+    public List<Synset> wordNetSenseIds() {
         return this.wordnetIds;
     }
 
-    public void addWordNetSenseId(String senseId) {
+    public void addWordNetSenseId(Synset senseId) {
         this.wordnetIds.add(senseId);
     }
 

@@ -1,5 +1,7 @@
 package edu.illinois.cs.cogcomp.finer.components.pattern_typer;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 
 /**
@@ -47,5 +49,20 @@ public class SimplePattern {
         result = 31 * result + after;
         result = 31 * result + Arrays.hashCode(tokens);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < before; i++) {
+            sb.append("* ");
+        }
+
+        sb.append(StringUtils.join(tokens, " "));
+
+        for (int i = 0; i < after; i++) {
+            sb.append(" *");
+        }
+        return sb.toString();
     }
 }

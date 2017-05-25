@@ -50,8 +50,8 @@ public class AnnotationFiles {
 
     public void init() throws IOException, AnnotatorException, JWNLException {
         processor = getPipeline();
-        finerAnnotator = new FinerAnnotator(PipelineUtils
-                .readFinerTypes("resources/type_to_wordnet_senses.txt"));
+//        finerAnnotator = new FinerAnnotator(PipelineUtils
+//                .readFinerTypes("resources/type_to_wordnet_senses.txt"));
 
         db = DBMaker
                 .fileDB(String.format("%s_%d", parameters.output, 0))

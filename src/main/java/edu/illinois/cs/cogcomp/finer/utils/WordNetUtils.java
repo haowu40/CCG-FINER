@@ -86,7 +86,7 @@ public class WordNetUtils {
         return w.getSenses().get(id);
     }
 
-    private List<Pointer> getPointers(Synset synset, PointerType type) {
+    public List<Pointer> getPointers(Synset synset, PointerType type) {
         List<Pointer> pointers = new ArrayList<>();
         // strict matching i.e. instance hyponyms not in hyponyms
         for (Pointer p : synset.getPointers(type))

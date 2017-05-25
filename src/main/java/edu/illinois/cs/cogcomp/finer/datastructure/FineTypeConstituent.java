@@ -2,6 +2,7 @@ package edu.illinois.cs.cogcomp.finer.datastructure;
 
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,9 @@ import java.util.Map;
  * Created by haowu4 on 5/17/17.
  */
 public class FineTypeConstituent extends Constituent {
+
+    private FinerType coarseType;
+
     public FineTypeConstituent(String label, String viewName, TextAnnotation text, int start, int end) {
         super(label, viewName, text, start, end);
         reasons = new HashMap<>();
@@ -27,12 +31,28 @@ public class FineTypeConstituent extends Constituent {
         reasons = new HashMap<>();
     }
 
-    private Map<String, List<String>> reasons;
+    private Map<String, List<AnnotationReason>> reasons;
 
-    public void addReason(String type, Class annotatorClazz) {
-        List<String> x = reasons.getOrDefault(type, new ArrayList<>());
-        x.add(annotatorClazz.getCanonicalName());
+    public void addReason(String type, AnnotationReason reason) {
+        List<AnnotationReason> x = reasons.getOrDefault(type, new ArrayList<>());
         reasons.put(type, x);
     }
 
+    public void addType(FinerType t) {
+        if (t.isVisible()) {
+            this.labelsToScores.put(t.getType(), 1.0);
+        }
+    }
+
+    public void addCoarseType(FinerType t) {
+        if (t.isVisible()) {
+            this.labelsToScores.put(t.getType(), 1.0);
+        }
+        this.coarseType = t;
+    }
+
+
+    public FinerType getCoarseType() {
+        return coarseType;
+    }
 }

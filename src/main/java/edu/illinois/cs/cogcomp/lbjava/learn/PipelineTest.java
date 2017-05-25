@@ -99,6 +99,7 @@ public class PipelineTest {
 
 //        BasicAnnotatorService bas = getPipeline();
         NERAnnotatorPub co = new NERAnnotatorPub(ViewNames.NER_ONTONOTES);
+        String x = "This is a long sentences";
         co.initialize(new ResourceManager(new Properties()));
         TextAnnotation ta = tab.createTextAnnotation("", "", "this is a example.");
         co.getView(ta);

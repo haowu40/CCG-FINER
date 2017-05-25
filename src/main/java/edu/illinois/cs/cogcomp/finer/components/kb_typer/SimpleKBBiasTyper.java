@@ -1,15 +1,14 @@
 package edu.illinois.cs.cogcomp.finer.components.kb_typer;
 
-import edu.illinois.cs.cogcomp.core.datastructures.Pair;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
+import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Sentence;
 import edu.illinois.cs.cogcomp.finer.components.IFinerTyper;
-import edu.illinois.cs.cogcomp.finer.datastructure.FineNerType;
+import edu.illinois.cs.cogcomp.finer.datastructure.AnnotationReason;
+import edu.illinois.cs.cogcomp.finer.datastructure.FineTypeConstituent;
+import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +17,9 @@ import java.util.Map;
  * Created by haowu4 on 5/15/17.
  */
 public class SimpleKBBiasTyper implements IFinerTyper {
-    Map<String, List<FineNerType>> surfaceToTypeDB;
+    Map<String, List<FinerType>> surfaceToTypeDB;
 
-    public SimpleKBBiasTyper(Map<String, List<FineNerType>> surfaceToTypeDB) {
+    public SimpleKBBiasTyper(Map<String, List<FinerType>> surfaceToTypeDB) {
         this.surfaceToTypeDB = surfaceToTypeDB;
     }
 
@@ -28,18 +27,22 @@ public class SimpleKBBiasTyper implements IFinerTyper {
         throw new NotImplementedException();
     }
 
-    public List<FineNerType> annotateSingleMention(Constituent mention) {
+    public List<FinerType> annotateSingleMention(Constituent mention, Sentence sentenc) {
         String surface = mention.getSurfaceForm();
         return surfaceToTypeDB.getOrDefault(surface, new ArrayList<>());
     }
 
     @Override
-    public List<Pair<Constituent, List<FineNerType>>> annotate(List<Constituent> mentions) {
-        List<Pair<Constituent, List<FineNerType>>> ret = new ArrayList<>();
-        for (Constituent mention : mentions) {
-            List<FineNerType> annotated = annotateSingleMention(mention);
-            ret.add(new Pair<>(mention, annotated));
+    public void annotate(List<FineTypeConstituent> mentions, Sentence sentence) {
+        for (FineTypeConstituent mention : mentions) {
+            List<FinerType> annotated = annotateSingleMention(mention, sentence);
+            for (FinerType t : annotated) {
+                String typeName = t.getType();
+                mention.addType(t);
+                AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
+                mention.addReason(typeName, reason);
+            }
         }
-        return ret;
+
     }
 }

@@ -32,20 +32,20 @@ public class FinerSystemTest {
                 "Sadrist detainees , an end to military operations against " +
                 "them and al-Maliki 's resignation .";
 
-        FinerAnnotator finerAnnotator = new FinerAnnotator(PipelineUtils
-                .readFinerTypes("resources/type_to_wordnet_senses.txt"));
-
-        BasicAnnotatorService processor = getPipeline();
-
-        TextAnnotation ta = processor.createAnnotatedTextAnnotation("", "",
-                sentence);
-
-
-        View v = finerAnnotator.annotateByHypernymModel(ta);
-
-        for (Constituent c : v.getConstituents()) {
-            System.out.println(c.toString());
-        }
+//        FinerAnnotator finerAnnotator = new FinerAnnotator(PipelineUtils
+//                .readFinerTypes("resources/type_to_wordnet_senses.txt"));
+//
+//        BasicAnnotatorService processor = getPipeline();
+//
+//        TextAnnotation ta = processor.createAnnotatedTextAnnotation("", "",
+//                sentence);
+//
+//
+////        View v = finerAnnotator.annotateByHypernymModel(ta);
+//
+//        for (Constituent c : v.getConstituents()) {
+//            System.out.println(c.toString());
+//        }
 
     }
 }
