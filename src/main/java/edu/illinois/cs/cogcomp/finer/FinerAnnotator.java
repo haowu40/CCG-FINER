@@ -55,6 +55,11 @@ public class FinerAnnotator extends Annotator {
             for (IFinerTyper typer : this.typers) {
                 typer.annotate(sentence_candidates, sent);
             }
+
+            for (FineTypeConstituent c : sentence_candidates) {
+                c.finish();
+                allCandidates.add(c);
+            }
         }
         return allCandidates;
     }

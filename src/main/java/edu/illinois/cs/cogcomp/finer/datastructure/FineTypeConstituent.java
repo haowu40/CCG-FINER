@@ -2,12 +2,10 @@ package edu.illinois.cs.cogcomp.finer.datastructure;
 
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.Constituent;
 import edu.illinois.cs.cogcomp.core.datastructures.textannotation.TextAnnotation;
+import edu.illinois.cs.cogcomp.finer.FinerAnnotator;
 import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by haowu4 on 5/17/17.
@@ -15,20 +13,18 @@ import java.util.Map;
 public class FineTypeConstituent extends Constituent {
 
     private FinerType coarseType;
+    private Set<FinerType> fineTypes;
 
-    public FineTypeConstituent(String label, String viewName, TextAnnotation text, int start, int end) {
-        super(label, viewName, text, start, end);
-        reasons = new HashMap<>();
+    private static Map<String, Double> getLablToScore() {
+        Map<String, Double> ret = new HashMap<String, Double>();
+        ret.put("FinerType", 1.0);
+        return ret;
     }
 
-    public FineTypeConstituent(Map<String, Double> labelsToScores, String viewName, TextAnnotation text, int start, int end) {
-        super(labelsToScores, viewName, text, start, end);
+    public FineTypeConstituent(TextAnnotation text, int start, int end) {
+        super(getLablToScore(), FinerAnnotator.VIEW_NAME, text, start, end);
         reasons = new HashMap<>();
-    }
-
-    public FineTypeConstituent(String label, double score, String viewName, TextAnnotation text, int start, int end) {
-        super(label, score, viewName, text, start, end);
-        reasons = new HashMap<>();
+        this.fineTypes = new HashSet<>();
     }
 
     private Map<String, List<AnnotationReason>> reasons;
@@ -38,16 +34,11 @@ public class FineTypeConstituent extends Constituent {
         reasons.put(type, x);
     }
 
-    public void addType(FinerType t) {
-        if (t.isVisible()) {
-            this.labelsToScores.put(t.getType(), 1.0);
-        }
+    public void addFineType(FinerType t) {
+        this.fineTypes.add(t);
     }
 
     public void addCoarseType(FinerType t) {
-        if (t.isVisible()) {
-            this.labelsToScores.put(t.getType(), 1.0);
-        }
         this.coarseType = t;
     }
 
@@ -55,4 +46,18 @@ public class FineTypeConstituent extends Constituent {
     public FinerType getCoarseType() {
         return coarseType;
     }
+
+    public void finish() {
+        this.labelsToScores.clear();
+        for (FinerType t : this.fineTypes) {
+            if (t.isVisible()) {
+                this.labelsToScores.put(t.getType(), 1.0);
+            }
+        }
+
+        if (this.coarseType.isVisible()) {
+            this.labelsToScores.put(this.coarseType.getType(), 1.0);
+        }
+    }
+
 }

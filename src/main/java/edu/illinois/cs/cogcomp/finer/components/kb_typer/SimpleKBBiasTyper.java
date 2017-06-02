@@ -37,10 +37,12 @@ public class SimpleKBBiasTyper implements IFinerTyper {
         for (FineTypeConstituent mention : mentions) {
             List<FinerType> annotated = annotateSingleMention(mention, sentence);
             for (FinerType t : annotated) {
-                String typeName = t.getType();
-                mention.addType(t);
-                AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
-                mention.addReason(typeName, reason);
+                if (mention.getCoarseType().isParentOf(t)) {
+                    String typeName = t.getType();
+                    mention.addFineType(t);
+                    AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
+                    mention.addReason(typeName, reason);
+                }
             }
         }
 

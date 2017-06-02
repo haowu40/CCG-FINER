@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,12 +28,10 @@ public class TypeSystem {
 
     private final static Logger log = LoggerFactory.getLogger(TypeSystem.class);
 
-    public static TypeSystem getFromYaml(URL url) throws IOException {
-
-        log.info("Loading type system from {}", url.toString());
+    public static TypeSystem getFromYaml(InputStream is) throws IOException {
         Yaml yaml = new Yaml();
         TypeInfos load = null;
-        load = yaml.loadAs(url.openStream(), TypeInfos.class);
+        load = yaml.loadAs(is, TypeInfos.class);
         Map<String, FinerType> typeCollection = new HashMap<>();
         Set<FinerType> invisiableTypes = new HashSet<>();
         for (Map.Entry<String, TypeInfo> entry : load.typeInfos.entrySet()) {

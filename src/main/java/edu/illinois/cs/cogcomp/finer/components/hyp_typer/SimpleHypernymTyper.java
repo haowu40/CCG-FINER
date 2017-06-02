@@ -54,7 +54,7 @@ public class SimpleHypernymTyper implements IFinerTyper {
                 List<FinerType> infered = typeToSynsets.getOrDefault(synset_offset_pos, new ArrayList<>());
                 for (FinerType t : infered) {
                     if (t.isChildOf(coarseType)) {
-                        mention.addType(t);
+                        mention.addFineType(t);
                         AnnotationReason ar = new AnnotationReason(SimpleHypernymTyper.class);
                         ar.addClue(c);
                         mention.addReason(t.getType(), ar);

@@ -20,6 +20,15 @@ public class SimplePatternBasedTyper implements IFinerTyper {
     private Map<SimplePattern, List<FinerType>> allPatterns;
     private int windowSize = 5;
 
+    public SimplePatternBasedTyper(Map<SimplePattern, List<FinerType>> allPatterns) {
+        this(allPatterns, 5);
+    }
+
+    public SimplePatternBasedTyper(Map<SimplePattern, List<FinerType>> allPatterns, int windowSize) {
+        this.allPatterns = allPatterns;
+        this.windowSize = windowSize;
+    }
+
     public List<SimplePattern> extractAllPattern(String[] surface) {
         List<SimplePattern> ret = new ArrayList<>();
         for (int i = 0; i < surface.length; i++) {
@@ -53,7 +62,7 @@ public class SimplePatternBasedTyper implements IFinerTyper {
         for (SimplePattern sp : existing_patterns) {
             for (FinerType t : allPatterns.getOrDefault(sp, new ArrayList<>())) {
                 if (t.isChildOf(coarseType)) {
-                    c.addType(t);
+                    c.addFineType(t);
                     AnnotationReason ar = new AnnotationReason(SimplePatternBasedTyper.class);
                     ar.setComment(sp.toString());
                     c.addReason(t.getType(), ar);

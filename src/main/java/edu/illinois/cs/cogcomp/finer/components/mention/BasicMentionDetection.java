@@ -34,9 +34,8 @@ public class BasicMentionDetection implements MentionDetecter {
             String typeName = coarseType.toString();
             Map<String, Double> l2s = new HashMap<>();
             l2s.put(typeName, 1.0);
-            FineTypeConstituent mention = new FineTypeConstituent(l2s, FinerAnnotator.VIEW_NAME, c
-                    .getTextAnnotation
-                            (), c.getStartSpan(), c.getEndSpan());
+            FineTypeConstituent mention = new FineTypeConstituent(c.getTextAnnotation(),
+                    c.getStartSpan(), c.getEndSpan());
             mention.addCoarseType(coarseType);
             AnnotationReason reason = new AnnotationReason(BasicMentionDetection.class);
             mention.addReason(typeName, reason);
