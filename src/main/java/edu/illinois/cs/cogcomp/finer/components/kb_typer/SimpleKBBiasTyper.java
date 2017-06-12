@@ -6,7 +6,6 @@ import edu.illinois.cs.cogcomp.finer.components.IFinerTyper;
 import edu.illinois.cs.cogcomp.finer.datastructure.AnnotationReason;
 import edu.illinois.cs.cogcomp.finer.datastructure.FineTypeConstituent;
 import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -21,10 +20,6 @@ public class SimpleKBBiasTyper implements IFinerTyper {
 
     public SimpleKBBiasTyper(Map<String, List<FinerType>> surfaceToTypeDB) {
         this.surfaceToTypeDB = surfaceToTypeDB;
-    }
-
-    public static SimpleKBBiasTyper constructSimpleKBBiasTyperFromTextInput(BufferedReader reader) {
-        throw new NotImplementedException();
     }
 
     public List<FinerType> annotateSingleMention(Constituent mention, Sentence sentenc) {

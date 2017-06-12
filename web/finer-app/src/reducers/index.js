@@ -9,6 +9,7 @@ import { Map } from 'immutable';
 const INIT_STATE = Map({
 	loading:false,
 	text:"",
+  mentionId:-1,
 	annotation:{}})
 // const annotateText = (state = false, action) => {
 //   switch (action.type) {
@@ -31,12 +32,14 @@ const INIT_STATE = Map({
 const loadingAnnotation = (state = INIT_STATE, action) => {
   switch (action.type) {
     case RECEIVE_ANNOTATION:   		
-       return state.set('annotation', action.annotation)
+      return state.set('annotation', action.annotation)
        			.set('loading', false);
-   case ANNOTATE_TEXT:
-				return state.set('annotation', {})
+    case ANNOTATE_TEXT:
+			return state.set('annotation', {})
 				.set('text', action.text)
        			.set('loading', true);
+    case SELECT_MENTION:
+      return state.set('mentionId', action.mentionId);
    default:
       return state
   }

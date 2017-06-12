@@ -16,6 +16,11 @@ export const receiveAnnotation = (annotation) => ({
   annotation
 })
 
+export const selectMention = (mentionId) => ({
+  type: SELECT_MENTION,
+  mentionId
+})
+
 
 // const fetchAnnotation = text => dispatch => {
 //   dispatch(annotateText(text))
@@ -42,10 +47,10 @@ export const fetchAnnotation = text => dispatch => {
 	console.log("Fetching annotation...")
 	console.log(text)
 	sleep(2000).then( () => {
-		let token = (start, end, typs, selected = false) => ({
+		let token = (start, end, types, selected = false) => ({
 				start,
 				end,
-				typs,
+				types,
 				selected
 			})
 
@@ -53,12 +58,12 @@ export const fetchAnnotation = text => dispatch => {
 		let reason = (evidence, comment) => ({evidence, comment})
 
 		let action = receiveAnnotation({
-			tokens : ["A", "B", "C", "D", "E"],
+			tokens : ["China", "invite", "Google", "Inc", "to", "join", "its", "conference"],
 			mentions: [
 				token(0,1,[new_types("person")], true),
 				token(2,4,[new_types("organization", reason([1,2], "")),
-							new_types("organization.government"), reason("just comment")])],		
-		});
+						   new_types("organization.government"), reason("just comment")])
+				]});
 		console.log(action)
 		dispatch(action)		
 	})

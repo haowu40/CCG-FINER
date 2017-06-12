@@ -10,13 +10,11 @@ import edu.illinois.cs.cogcomp.finer.components.pattern_typer.SimplePatternBased
 import edu.illinois.cs.cogcomp.finer.config.FinerConfiguration;
 import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 import edu.illinois.cs.cogcomp.finer.datastructure.types.TypeSystem;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import org.yaml.snakeyaml.Yaml;
 
 /**
  * Created by haowu4 on 5/16/17.
@@ -30,6 +28,10 @@ public class FinerTyperFactory {
         if (!lazyInit) {
             this.init();
         }
+    }
+
+    public FinerTyperFactory(FinerConfiguration configuration) {
+        this(configuration, false);
     }
 
     private void init() {
@@ -73,9 +75,6 @@ public class FinerTyperFactory {
         }
     }
 
-    public FinerTyperFactory(FinerConfiguration configuration) {
-        this(configuration, false);
-    }
 
     public FinerAnnotator getAnnotator() {
         if (this.mentionDetecter == null || this.typers.isEmpty()) {

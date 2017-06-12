@@ -8,6 +8,9 @@ import reducer from './reducers'
 import AnnotationAppContainer from './containers/AnnotationAppContainer'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -23,8 +26,14 @@ const store = createStore(
   applyMiddleware(...middleware)
 )
 
+
+let theme = getMuiTheme(lightBaseTheme)
+
+console.log(theme.palette)
+console.log(theme.fontFamily)
+
 render(
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={theme}>
 		<Provider store={store}>
 			<AnnotationAppContainer />
 		</Provider>

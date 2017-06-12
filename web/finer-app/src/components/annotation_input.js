@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField'
 import PropTypes from 'prop-types'
 import LinearProgress from 'material-ui/LinearProgress';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 
 class AnnotationInput extends React.Component {
@@ -15,6 +16,8 @@ class AnnotationInput extends React.Component {
 
   render() {
     if (this.props.lock){
+
+
       return <div>
         <TextField 
           ref="annotatioInputField"
@@ -23,6 +26,13 @@ class AnnotationInput extends React.Component {
           multiLine={true}
           fullWidth={true}
           rows={10} />
+
+        <LinearProgress mode="indeterminate" />
+        <RaisedButton 
+          label="Processing" 
+          disabled={true} 
+          fullWidth={true}
+          onClick={e => this.props.onClick(this.refs.annotatioInputField.getValue())}/>
 
         <LinearProgress mode="indeterminate" />
 
@@ -40,7 +50,8 @@ class AnnotationInput extends React.Component {
         <br/>
         <RaisedButton 
           label="Annotate" 
-          primary={true} 
+          secondary={true} 
+          fullWidth={true}
           onClick={e => this.props.onClick(this.refs.annotatioInputField.getValue())}/>
       </div>
        );

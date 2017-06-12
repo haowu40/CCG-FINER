@@ -6,15 +6,16 @@ import java.io.InputStream;
  * Created by haowu4 on 5/14/17.
  */
 public class FinerConfiguration {
-    private String patternDBPath;
-    private String KBMentionDBPath;
-    private String wordSenseDBPath;
-    private String wordVectorPath;
-    private String typeSystemDBPath;
+    private String patternDBPath = "data/patterndb.txt";
+    private String KBMentionDBPath = "data/patterndb.txt";
+    private String wordSenseDBPath = "data/patterndb.txt";
+    private String wordVectorPath = "data/patterndb.txt";
+    private String typeSystemDBPath = "data/patterndb.txt";
 
-    private boolean useKBBiasTyper;
-    private boolean usePatternTyper;
-    private boolean useHyponymTyper;
+
+    private boolean useKBBiasTyper = true;
+    private boolean usePatternTyper = true;
+    private boolean useHyponymTyper = true;
 
 
     public String getPatternDBPath() {
