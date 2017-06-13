@@ -11,6 +11,7 @@ import edu.illinois.cs.cogcomp.core.datastructures.textannotation
         .TextAnnotation;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.Configurator;
 import edu.illinois.cs.cogcomp.core.utilities.configuration.ResourceManager;
+import edu.illinois.cs.cogcomp.ner.NERAnnotator;
 import edu.illinois.cs.cogcomp.pipeline.common.PipelineConfigurator;
 import edu.illinois.cs.cogcomp.pipeline.main.PipelineFactory;
 import org.apache.commons.io.FileUtils;
@@ -30,12 +31,13 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length == 0) {
             // Print help statement.
             System.exit(1);
         }
 
+        NERAnnotator co = new NERAnnotator(ViewNames.NER_CONLL);
 
         String[] appArgs = new String[args.length - 1];
         for (int i = 0; i < appArgs.length; i++) {

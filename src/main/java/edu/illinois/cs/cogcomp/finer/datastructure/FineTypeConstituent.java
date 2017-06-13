@@ -14,6 +14,7 @@ public class FineTypeConstituent extends Constituent {
 
     private FinerType coarseType;
     private Set<FinerType> fineTypes;
+    private Map<String, List<AnnotationReason>> reasons;
 
     private static Map<String, Double> getLablToScore() {
         Map<String, Double> ret = new HashMap<String, Double>();
@@ -27,7 +28,6 @@ public class FineTypeConstituent extends Constituent {
         this.fineTypes = new HashSet<>();
     }
 
-    private Map<String, List<AnnotationReason>> reasons;
 
     public void addReason(String type, AnnotationReason reason) {
         List<AnnotationReason> x = reasons.getOrDefault(type, new ArrayList<>());
@@ -58,6 +58,10 @@ public class FineTypeConstituent extends Constituent {
         if (this.coarseType.isVisible()) {
             this.labelsToScores.put(this.coarseType.getType(), 1.0);
         }
+    }
+
+    public List<AnnotationReason> getReasons(String type) {
+        return reasons.getOrDefault(type, new ArrayList<>());
     }
 
 }

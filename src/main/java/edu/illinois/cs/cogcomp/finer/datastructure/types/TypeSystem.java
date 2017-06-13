@@ -1,12 +1,13 @@
 package edu.illinois.cs.cogcomp.finer.datastructure.types;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
-
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,9 +30,14 @@ public class TypeSystem {
     private final static Logger log = LoggerFactory.getLogger(TypeSystem.class);
 
     public static TypeSystem getFromYaml(InputStream is) throws IOException {
-        Yaml yaml = new Yaml();
+
+
+        Gson gson = new GsonBuilder().create();
         TypeInfos load = null;
-        load = yaml.loadAs(is, TypeInfos.class);
+        try (BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(is))) {
+            load = gson.fromJson(reader, TypeInfos.class);
+        }
         Map<String, FinerType> typeCollection = new HashMap<>();
         Set<FinerType> invisiableTypes = new HashSet<>();
         for (Map.Entry<String, TypeInfo> entry : load.typeInfos.entrySet()) {

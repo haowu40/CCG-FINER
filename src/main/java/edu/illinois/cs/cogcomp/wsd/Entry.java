@@ -20,21 +20,25 @@ import static edu.illinois.cs.cogcomp.wsd.WSD.VIEWNAME;
 public class Entry {
     public static void main(String[] args) throws IOException,
             AnnotatorException {
-        String sentence = "Not content with bringing Rocky back to cinema " +
-                "screens , another Stallone character Vietnam vet " +
-                "John Rambo is coming out of hibernation , 19 years after " +
-                "the third film in the series .";
+
+    }
+
+    public static BasicAnnotatorService getPipeline() throws IOException, AnnotatorException {
+//        String sentence = "Not content with bringing Rocky back to cinema " +
+//                "screens , another Stallone character Vietnam vet " +
+//                "John Rambo is coming out of hibernation , 19 years after " +
+//                "the third film in the series .";
         Properties props = new Properties();
         props.setProperty("usePos", Configurator.TRUE);
         props.setProperty("useLemma",
-                Configurator.FALSE);
+                Configurator.TRUE);
         props.setProperty("useShallowParse",
-                Configurator.FALSE);
+                Configurator.TRUE);
 
         props.setProperty("useNerConll",
                 Configurator.FALSE);
         props.setProperty("useNerOntonotes",
-                Configurator.FALSE);
+                Configurator.TRUE);
         props.setProperty("useStanfordParse",
                 Configurator.FALSE);
         props.setProperty("useStanfordDep",
@@ -84,19 +88,37 @@ public class Entry {
 
         BasicAnnotatorService processor = PipelineFactory
                 .buildPipeline(new ResourceManager(props));
-        TextAnnotation ta = processor.createAnnotatedTextAnnotation("", "",
-                sentence);
+
+        ResourceManager resourceManager = new ResourceManager(props);
+
+//        WordSenseAnnotator wsd = new WordSenseAnnotator(VIEWNAME, new String[]{""},
+//                resourceManager);
+//        processor.addAnnotator(wsd);
+        return processor;
+    }
+
+    public static WordSenseAnnotator getDefaultWSD() {
+        Properties props = new Properties();
+
+        props.setProperty(
+                "wsd-word-embedding-file",
+                "/home/haowu4/data/autoextend/GoogleNews-vectors" +
+                        "-negative300.combined_500k.txt");
+
+        props.setProperty(
+                "wsd-sense-embedding-file",
+                "/home/haowu4/data/autoextend/synset_embeddings_300.txt");
+
+        props.setProperty(
+                "wsd-sense-mapping-file",
+                "/home/haowu4/data/autoextend/word_pos_to_synsets.txt");
 
         ResourceManager resourceManager = new ResourceManager(props);
 
         WordSenseAnnotator wsd = new WordSenseAnnotator("", new String[]{""},
                 resourceManager);
-
-//        wsd.initialize(resourceManager);
-
-        wsd.addView(ta);
-
-        System.out.println(ta.getView(VIEWNAME));
+        return wsd;
 
     }
+
 }

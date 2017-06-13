@@ -49,7 +49,16 @@ public class SimpleHypernymTyper implements IFinerTyper {
 
         for (Constituent c : wsdView.getConstituentsCoveringSpan(start, end)) {
             if (posView.getConstituentsCovering(c).get(0).getLabel().startsWith("N")) {
-                Synset synset = wordNetUtils.getSynsetFromNLTKString(c.getLabel());
+                if (c.getLabel().isEmpty()) {
+                    continue;
+                }
+                Synset synset;
+                try {
+                    synset = wordNetUtils.getSynsetByOffset(c.getLabel());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.err.println(c.getLabel() + " Not Found...");
+                    continue;
+                }
                 String synset_offset_pos = synset.getOffset() + "" + synset.getPOS();
                 List<FinerType> infered = typeToSynsets.getOrDefault(synset_offset_pos, new ArrayList<>());
                 for (FinerType t : infered) {

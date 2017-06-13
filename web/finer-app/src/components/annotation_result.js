@@ -55,7 +55,7 @@ const AnnotationResult = function(args){
     while(i < value.tokens.length){
         let end = start2end.get(i)
         let isMention = true
-        if(end == undefined){
+        if(end === undefined){
           end = i+1
           isMention = false
         }
@@ -70,19 +70,18 @@ const AnnotationResult = function(args){
 
           let type_names = _.chain(mention.types)
                             .map((t) => t.type_name)
-                            .filter((t) => t != undefined)
-                            .map((t) => <span className="type-annotation">{t}</span>)
+                            .filter((t) => t !== undefined)
+                            .map((t) => <span className="type-annotation"> {t} </span>)
                             .value()
           console.log(type_names);
 
           token_span = (<span 
                           onClick={(e) => onClick(mention)}
-                          key={seq_key++}> 
-                          <b>{text} </b> {type_names}
-
+                          key={seq_key++}>                           
+                           [<b> {text} </b> ({type_names}) ]
                         </span>)  
   
-          if(i == selected && mention != undefined){
+          if(i === selected && mention !== undefined){
               // explnation_span = (<span 
               //                     open={true}
               //                     anchorEl={token_span}

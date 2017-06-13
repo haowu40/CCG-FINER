@@ -71,7 +71,7 @@ public class FinerType {
             if (it.equals(this)) {
                 return true;
             }
-            it = t.parent;
+            it = it.parent;
         }
         return false;
     }
@@ -82,7 +82,7 @@ public class FinerType {
             if (it.equals(this)) {
                 return true;
             }
-            it = t.parent;
+            it = it.parent;
         }
         return false;
     }

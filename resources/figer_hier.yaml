@@ -1,320 +1,321 @@
-person : 
-    parent : null
-    is_figer_type : true
-organization : 
-    parent : null
-    is_figer_type : true
-location : 
-    parent : null
-    is_figer_type : true
-building : 
-    parent : null
-    is_figer_type : true
-time : 
-    parent : null
-    is_figer_type : true
-norpl :
-    parent : null
-    is_figer_type : false
-product : 
-    parent : null
-    is_figer_type : true
-work :
-    parent : null
-    is_figer_type : false
-event : 
-    parent : null
-    is_figer_type : true
-title : 
-    parent : null
-    is_figer_type : true
-award : 
-    parent : null
-    is_figer_type : true
-finance.currency : 
-    parent : null
-    is_figer_type : true
-law : 
-    parent : null
-    is_figer_type : true
-transportation.road : 
-    parent : null
-    is_figer_type : true
-living_thing : 
-    parent : null
-    is_figer_type : true
-software : 
-    parent : null
-    is_figer_type : true
-visual_art.color : 
-    parent : null
-    is_figer_type : true
-medicine :
-    parent : null
-    is_figer_type : false
-geography :
-    parent : location
-    is_figer_type : true
-person.actor : 
-    parent : person.artist
-    is_figer_type : true
-person.artist : 
-    parent : person
-    is_figer_type : true
-person.musician : 
-    parent : person.artist
-    is_figer_type : true
-person.director : 
-    parent : person.artist
-    is_figer_type : true
-person.author : 
-    parent : person
-    is_figer_type : true
-person.engineer : 
-    parent : person
-    is_figer_type : true
-person.athlete : 
-    parent : person
-    is_figer_type : true
-person.doctor : 
-    parent : person
-    is_figer_type : true
-person.soldier : 
-    parent : person
-    is_figer_type : true
-person.coach : 
-    parent : person
-    is_figer_type : true
-person.architect : 
-    parent : person
-    is_figer_type : true
-person.terrorist : 
-    parent : person
-    is_figer_type : true
-person.monarch : 
-    parent : person
-    is_figer_type : true
-person.politician : 
-    parent : person
-    is_figer_type : true
-person.religious_leader : 
-    parent : person
-    is_figer_type : true
-broadcast_program : 
-    parent : work
-    is_figer_type : true
-event.election : 
-    parent : event
-    is_figer_type : true
-event.attack : 
-    parent : event
-    is_figer_type : true
-event.terrorist_attack : 
-    parent : event.attack
-    is_figer_type : true
-event.military_conflict : 
-    parent : event
-    is_figer_type : true
-event.natural_disaster : 
-    parent : event
-    is_figer_type : true
-event.protest : 
-    parent : event
-    is_figer_type : true
-event.sports_event : 
-    parent : event
-    is_figer_type : true
-food : 
-    parent : product
-    is_figer_type : true
-geography.glacier : 
-    parent : geography
-    is_figer_type : true
-geography.island : 
-    parent : geography
-    is_figer_type : true
-geography.mountain : 
-    parent : geography
-    is_figer_type : true
-location.body_of_water : 
-    parent : geography
-    is_figer_type : true
-location.county : 
-    parent : location
-    is_figer_type : true
-location.province : 
-    parent : location
-    is_figer_type : true
-location.city : 
-    parent : location
-    is_figer_type : true
-location.country : 
-    parent : location
-    is_figer_type : true
-location.cemetery : 
-    parent : location
-    is_figer_type : true
-location.bridge : 
-    parent : building
-    is_figer_type : true
-park : 
-    parent : location
-    is_figer_type : true
-building.airport : 
-    parent : building
-    is_figer_type : true
-building.library : 
-    parent : building
-    is_figer_type : true
-building.restaurant : 
-    parent : building
-    is_figer_type : true
-building.power_station : 
-    parent : building
-    is_figer_type : true
-building.sports_facility : 
-    parent : building
-    is_figer_type : true
-building.theater : 
-    parent : building
-    is_figer_type : true
-building.hotel : 
-    parent : building
-    is_figer_type : true
-building.hospital : 
-    parent : building
-    is_figer_type : true
-building.dam : 
-    parent : building
-    is_figer_type : true
-organization.fraternity_sorority : 
-    parent : organization
-    is_figer_type : true
-organization.sports_league : 
-    parent : organization
-    is_figer_type : true
-organization.terrorist_organization : 
-    parent : organization
-    is_figer_type : true
-organization.sports_team:
-    parent : organization
-    is_figer_type : true
-organization.educational_institution:
-    parent : organization
-    is_figer_type : true
-organization.company:
-    parent : organization
-    is_figer_type : true
-organization.airline : 
-    parent : organization.company
-    is_figer_type : true
-metropolitan_transit.transit_line : 
-    parent : organization.company
-    is_figer_type : true
-news_agency : 
-    parent : organization.company
-    is_figer_type : true
-transit : 
-    parent : organization.company
-    is_figer_type : true
-rail.railway : 
-    parent : organization.company
-    is_figer_type : true
-government.government : 
-    parent : organization
-    is_figer_type : true
-government.political_party : 
-    parent : organization
-    is_figer_type : true
-education.department : 
-    parent : organization
-    is_figer_type : true
-military : 
-    parent : organization
-    is_figer_type : true
-computer.programming_language : 
-    parent : norpl
-    is_figer_type : true
-language : 
-    parent : norpl
-    is_figer_type : true
-newspaper : 
-    parent : written_work
-    is_figer_type : true
-government_agency : 
-    parent : government.government
-    is_figer_type : true
-written_work : 
-    parent : work
-    is_figer_type : true
-art : 
-    parent : work
-    is_figer_type : true
-art.film : 
-    parent : work
-    is_figer_type : true
-play : 
-    parent : work
-    is_figer_type : true
-music : 
-    parent : work
-    is_figer_type : true
-medicine.drug : 
-    parent : medicine
-    is_figer_type : true
-medicine.symptom : 
-    parent : medicine
-    is_figer_type : true
+ typeInfos:
+  person :
+      parent : null
+      is_figer_type : true
+  organization :
+      parent : null
+      is_figer_type : true
+  location :
+      parent : null
+      is_figer_type : true
+  building :
+      parent : null
+      is_figer_type : true
+  time :
+      parent : null
+      is_figer_type : true
+  norpl :
+      parent : null
+      is_figer_type : false
+  product :
+      parent : null
+      is_figer_type : true
+  work :
+      parent : null
+      is_figer_type : false
+  event :
+      parent : null
+      is_figer_type : true
+  title :
+      parent : null
+      is_figer_type : true
+  award :
+      parent : null
+      is_figer_type : true
+  finance.currency :
+      parent : null
+      is_figer_type : true
+  law :
+      parent : null
+      is_figer_type : true
+  transportation.road :
+      parent : null
+      is_figer_type : true
+  living_thing :
+      parent : null
+      is_figer_type : true
+  software :
+      parent : null
+      is_figer_type : true
+  visual_art.color :
+      parent : null
+      is_figer_type : true
+  medicine :
+      parent : null
+      is_figer_type : false
+  geography :
+      parent : location
+      is_figer_type : true
+  person.actor :
+      parent : person.artist
+      is_figer_type : true
+  person.artist :
+      parent : person
+      is_figer_type : true
+  person.musician :
+      parent : person.artist
+      is_figer_type : true
+  person.director :
+      parent : person.artist
+      is_figer_type : true
+  person.author :
+      parent : person
+      is_figer_type : true
+  person.engineer :
+      parent : person
+      is_figer_type : true
+  person.athlete :
+      parent : person
+      is_figer_type : true
+  person.doctor :
+      parent : person
+      is_figer_type : true
+  person.soldier :
+      parent : person
+      is_figer_type : true
+  person.coach :
+      parent : person
+      is_figer_type : true
+  person.architect :
+      parent : person
+      is_figer_type : true
+  person.terrorist :
+      parent : person
+      is_figer_type : true
+  person.monarch :
+      parent : person
+      is_figer_type : true
+  person.politician :
+      parent : person
+      is_figer_type : true
+  person.religious_leader :
+      parent : person
+      is_figer_type : true
+  broadcast_program :
+      parent : work
+      is_figer_type : true
+  event.election :
+      parent : event
+      is_figer_type : true
+  event.attack :
+      parent : event
+      is_figer_type : true
+  event.terrorist_attack :
+      parent : event.attack
+      is_figer_type : true
+  event.military_conflict :
+      parent : event
+      is_figer_type : true
+  event.natural_disaster :
+      parent : event
+      is_figer_type : true
+  event.protest :
+      parent : event
+      is_figer_type : true
+  event.sports_event :
+      parent : event
+      is_figer_type : true
+  food :
+      parent : product
+      is_figer_type : true
+  geography.glacier :
+      parent : geography
+      is_figer_type : true
+  geography.island :
+      parent : geography
+      is_figer_type : true
+  geography.mountain :
+      parent : geography
+      is_figer_type : true
+  location.body_of_water :
+      parent : geography
+      is_figer_type : true
+  location.county :
+      parent : location
+      is_figer_type : true
+  location.province :
+      parent : location
+      is_figer_type : true
+  location.city :
+      parent : location
+      is_figer_type : true
+  location.country :
+      parent : location
+      is_figer_type : true
+  location.cemetery :
+      parent : location
+      is_figer_type : true
+  location.bridge :
+      parent : building
+      is_figer_type : true
+  park :
+      parent : location
+      is_figer_type : true
+  building.airport :
+      parent : building
+      is_figer_type : true
+  building.library :
+      parent : building
+      is_figer_type : true
+  building.restaurant :
+      parent : building
+      is_figer_type : true
+  building.power_station :
+      parent : building
+      is_figer_type : true
+  building.sports_facility :
+      parent : building
+      is_figer_type : true
+  building.theater :
+      parent : building
+      is_figer_type : true
+  building.hotel :
+      parent : building
+      is_figer_type : true
+  building.hospital :
+      parent : building
+      is_figer_type : true
+  building.dam :
+      parent : building
+      is_figer_type : true
+  organization.fraternity_sorority :
+      parent : organization
+      is_figer_type : true
+  organization.sports_league :
+      parent : organization
+      is_figer_type : true
+  organization.terrorist_organization :
+      parent : organization
+      is_figer_type : true
+  organization.sports_team:
+      parent : organization
+      is_figer_type : true
+  organization.educational_institution:
+      parent : organization
+      is_figer_type : true
+  organization.company:
+      parent : organization
+      is_figer_type : true
+  organization.airline :
+      parent : organization.company
+      is_figer_type : true
+  metropolitan_transit.transit_line :
+      parent : organization.company
+      is_figer_type : true
+  news_agency :
+      parent : organization.company
+      is_figer_type : true
+  transit :
+      parent : organization.company
+      is_figer_type : true
+  rail.railway :
+      parent : organization.company
+      is_figer_type : true
+  government.government :
+      parent : organization
+      is_figer_type : true
+  government.political_party :
+      parent : organization
+      is_figer_type : true
+  education.department :
+      parent : organization
+      is_figer_type : true
+  military :
+      parent : organization
+      is_figer_type : true
+  computer.programming_language :
+      parent : norpl
+      is_figer_type : true
+  language :
+      parent : norpl
+      is_figer_type : true
+  newspaper :
+      parent : written_work
+      is_figer_type : true
+  government_agency :
+      parent : government.government
+      is_figer_type : true
+  written_work :
+      parent : work
+      is_figer_type : true
+  art :
+      parent : work
+      is_figer_type : true
+  art.film :
+      parent : work
+      is_figer_type : true
+  play :
+      parent : work
+      is_figer_type : true
+  music :
+      parent : work
+      is_figer_type : true
+  medicine.drug :
+      parent : medicine
+      is_figer_type : true
+  medicine.symptom :
+      parent : medicine
+      is_figer_type : true
 
-education.educational_degree : 
-    parent : award
-    is_figer_type : true
-medicine.medical_treatment : 
-    parent : medicine
-    is_figer_type : true
-livingthing.animal : 
-    parent : living_thing
-    is_figer_type : true
+  education.educational_degree :
+      parent : award
+      is_figer_type : true
+  medicine.medical_treatment :
+      parent : medicine
+      is_figer_type : true
+  livingthing.animal :
+      parent : living_thing
+      is_figer_type : true
 
-product.engine_device : 
-    parent : product
-    is_figer_type : true
-product.computer : 
-    parent : product
-    is_figer_type : true
-product.airplane : 
-    parent : product
-    is_figer_type : true
-product.car : 
-    parent : product
-    is_figer_type : true
-product.camera : 
-    parent : product
-    is_figer_type : true
-product.ship : 
-    parent : product
-    is_figer_type : true
-product.spacecraft : 
-    parent : product
-    is_figer_type : true
-product.weapon : 
-    parent : product.instrument
-    is_figer_type : true
-product.instrument : 
-    parent : product
-    is_figer_type : true
-product.mobile_phone : 
-    parent : product
-    is_figer_type : true
-people.ethnicity :
-    parent : norpl
-    is_figer_type : true
-train : 
-    parent : product
-    is_figer_type : true
-astral_body : 
-    parent : geography
-    is_figer_type : true
-finance.stock_exchange : 
-    parent : organization
-    is_figer_type : true
+  product.engine_device :
+      parent : product
+      is_figer_type : true
+  product.computer :
+      parent : product
+      is_figer_type : true
+  product.airplane :
+      parent : product
+      is_figer_type : true
+  product.car :
+      parent : product
+      is_figer_type : true
+  product.camera :
+      parent : product
+      is_figer_type : true
+  product.ship :
+      parent : product
+      is_figer_type : true
+  product.spacecraft :
+      parent : product
+      is_figer_type : true
+  product.weapon :
+      parent : product.instrument
+      is_figer_type : true
+  product.instrument :
+      parent : product
+      is_figer_type : true
+  product.mobile_phone :
+      parent : product
+      is_figer_type : true
+  people.ethnicity :
+      parent : norpl
+      is_figer_type : true
+  train :
+      parent : product
+      is_figer_type : true
+  astral_body :
+      parent : geography
+      is_figer_type : true
+  finance.stock_exchange :
+      parent : organization
+      is_figer_type : true

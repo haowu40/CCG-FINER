@@ -1,5 +1,7 @@
 package edu.illinois.cs.cogcomp.finer.components;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import edu.illinois.cs.cogcomp.finer.FinerAnnotator;
 import edu.illinois.cs.cogcomp.finer.components.hyp_typer.SimpleHypernymTyper;
 import edu.illinois.cs.cogcomp.finer.components.kb_typer.SimpleKBBiasTyper;
@@ -43,7 +45,7 @@ public class FinerTyperFactory {
         }
 
 
-        try (InputStream is = new FileInputStream(configuration.getKBMentionDBPath())) {
+        try (InputStream is = new FileInputStream(configuration.getTypeMappingDBPath())) {
             this.mentionDetecter = this.getMentionDetecter(is);
         } catch (IOException e) {
             e.printStackTrace();
@@ -84,9 +86,16 @@ public class FinerTyperFactory {
     }
 
     private MentionDetecter getMentionDetecter(InputStream is) {
+        Gson gson = new GsonBuilder().create();
         Map<String, String> ret = new HashMap<>();
-        Yaml yaml = new Yaml();
-        ret = yaml.loadAs(is, ret.getClass());
+
+        try (BufferedReader reader =
+                     new BufferedReader(new InputStreamReader(is))) {
+            ret = gson.fromJson(reader, ret.getClass());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return new BasicMentionDetection(new TypeMapper(this.typeSystem, ret));
     }
 
@@ -129,7 +138,7 @@ public class FinerTyperFactory {
 
             SimplePattern pattern = new SimplePattern(before, after, tokens);
 
-            List<FinerType> types = Arrays.stream(parts[1].split(" ")).map(this::getType).collect(Collectors.toList());
+            List<FinerType> types = Arrays.stream(parts[3].split(" ")).map(this::getType).collect(Collectors.toList());
             map.put(pattern, types);
         }
         return new SimplePatternBasedTyper(map);
