@@ -31,6 +31,9 @@ public class BasicMentionDetection implements MentionDetecter {
         View ner = sentence.getView(ViewNames.NER_ONTONOTES);
         for (Constituent c : ner.getConstituents()) {
             FinerType coarseType = mapper.getType(c.getLabel());
+            if (coarseType == null) {
+                continue;
+            }
             String typeName = coarseType.toString();
             Map<String, Double> l2s = new HashMap<>();
             l2s.put(typeName, 1.0);

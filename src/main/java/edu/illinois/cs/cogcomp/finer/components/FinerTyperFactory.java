@@ -100,14 +100,19 @@ public class FinerTyperFactory {
     }
 
     private IFinerTyper getKBBiasTyper(InputStream is) throws IOException {
-        Map<String, List<FinerType>> map = new HashMap<>();
+        Map<String, Map<FinerType, Double>> map = new HashMap<>();
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split("\t");
             String pattern = parts[0];
-            List<FinerType> types = Arrays.stream(parts[1].split(" ")).map(this::getType).collect(Collectors.toList());
-            map.put(pattern, types);
+            Map<FinerType, Double> scoreMap = new HashMap<>();
+            for (String typeAndScore : parts[1].split(" ")) {
+                FinerType type = getType(typeAndScore.split(":")[0]);
+                double score = Double.parseDouble(typeAndScore.split(":")[1]);
+                scoreMap.put(type, score);
+            }
+             map.put(pattern, scoreMap);
         }
         return new SimpleKBBiasTyper(map);
     }

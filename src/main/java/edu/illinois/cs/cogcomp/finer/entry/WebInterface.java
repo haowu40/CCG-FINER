@@ -84,7 +84,12 @@ public class WebInterface {
     public static String annotationToJson(TextAnnotation ta, List<FineTypeConstituent> mentions) {
         String[] tokens = ta.getTokens();
 
-        AnnootationResultResponse arr = new AnnootationResultResponse(tokens, mentions.stream().map(AnnotationMentionResponse::new).collect(Collectors.toList()));
+        AnnootationResultResponse arr = new AnnootationResultResponse(tokens,
+                mentions
+                        .stream()
+                        .map(AnnotationMentionResponse::new)
+                        .filter(a -> !a.types.isEmpty())
+                        .collect(Collectors.toList()));
         return GSON.toJson(arr);
     }
 
@@ -160,7 +165,7 @@ public class WebInterface {
         init();
         externalStaticFileLocation("web/finer-app/build");
 
-//        System.out.println(getAllAnnotation("The 68-year-old muscle man revealed he is preparing to once again star as the troubled and misunderstood Vietnam veteran John Rambo"));
+        System.out.println(getAllAnnotation("The 68-year-old muscle man revealed he is preparing to once again star as the troubled and misunderstood Vietnam veteran John Rambo"));
         get("/annotate", WebInterface::annotate);
     }
 

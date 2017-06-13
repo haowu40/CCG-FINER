@@ -8,36 +8,61 @@ import edu.illinois.cs.cogcomp.finer.datastructure.FineTypeConstituent;
 import edu.illinois.cs.cogcomp.finer.datastructure.types.FinerType;
 
 import java.io.BufferedReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by haowu4 on 5/15/17.
  */
 public class SimpleKBBiasTyper implements IFinerTyper {
-    Map<String, List<FinerType>> surfaceToTypeDB;
+    Map<String, Map<FinerType, Double>> surfaceToTypeDB;
 
-    public SimpleKBBiasTyper(Map<String, List<FinerType>> surfaceToTypeDB) {
+    public SimpleKBBiasTyper(Map<String, Map<FinerType, Double>> surfaceToTypeDB) {
         this.surfaceToTypeDB = surfaceToTypeDB;
     }
 
-    public List<FinerType> annotateSingleMention(Constituent mention, Sentence sentenc) {
+    public List<FinerType> annotateSingleMention(Constituent mention, FinerType coarseType) {
+        Set<FinerType> ret = new HashSet<>();
         String surface = mention.getSurfaceForm();
-        return surfaceToTypeDB.getOrDefault(surface, new ArrayList<>());
+        Map<FinerType, Double> candidates = surfaceToTypeDB.getOrDefault(surface, new HashMap<>());
+
+        double bestScore = Double.NEGATIVE_INFINITY;
+        FinerType bestType = null;
+        double norm = 0.0;
+
+        for (Map.Entry<FinerType, Double> entry : candidates.entrySet()) {
+            FinerType t = entry.getKey();
+            double v = entry.getValue();
+            if (coarseType.isParentOf(t)) {
+                if (v == 1.0) {
+                    ret.add(t);
+                } else {
+                    norm += v;
+                    if (bestScore < v) {
+                        bestScore = v;
+                        bestType = t;
+                    }
+                }
+            }
+        }
+
+        if (bestType != null && bestScore/norm > 0.4) {
+            ret.add(bestType);
+        }
+
+        return ret.stream().collect(Collectors.toList());
+
     }
 
     @Override
     public void annotate(List<FineTypeConstituent> mentions, Sentence sentence) {
         for (FineTypeConstituent mention : mentions) {
-            List<FinerType> annotated = annotateSingleMention(mention, sentence);
+            List<FinerType> annotated = annotateSingleMention(mention, mention.getCoarseType());
             for (FinerType t : annotated) {
-                if (mention.getCoarseType().isParentOf(t)) {
-                    String typeName = t.getType();
-                    mention.addFineType(t);
-                    AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
-                    mention.addReason(typeName, reason);
-                }
+                String typeName = t.getType();
+                mention.addFineType(t);
+                AnnotationReason reason = new AnnotationReason(SimpleKBBiasTyper.class);
+                mention.addReason(typeName, reason);
             }
         }
 
