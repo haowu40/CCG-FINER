@@ -121,4 +121,13 @@ public class Entry {
 
     }
 
+    public static WordSenseAnnotator getWithProperties(Properties props) {
+        ResourceManager resourceManager = new ResourceManager(props);
+
+        WordSenseAnnotator wsd = new WordSenseAnnotator("", new String[]{""},
+                resourceManager);
+        return wsd;
+
+    }
+
 }
