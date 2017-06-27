@@ -4,19 +4,18 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by haowu4 on 5/15/17.
  */
 public class TypeSystem {
+
     // IO related helper class.
     private static class TypeInfo {
         String parent;
@@ -80,8 +79,32 @@ public class TypeSystem {
     private Map<String, FinerType> typeCollection;
     private Set<FinerType> invisiableTypes;
 
-    public FinerType getType(String name) {
-        return typeCollection.get(name);
+    public FinerType getTypeOrFail(String name) {
+        if (typeCollection.containsKey(name)) {
+            FinerType t = typeCollection.get(name);
+            if (t != null) {
+                return t;
+            } else {
+                throw new RuntimeException("Type [" + name + "] is NULL.");
+            }
+        } else {
+            throw new RuntimeException("Type [" + name + "] Not Found");
+        }
+    }
+
+    public Set<String> failedQueries = new HashSet<>();
+
+    public Optional<FinerType> getType(String name) {
+        FinerType t = typeCollection.get(name);
+        if (t == null) {
+            if (!failedQueries.contains(name)) {
+                failedQueries.add(name);
+                System.err.println("Type [" + name + "] Not Found");
+            }
+            return Optional.empty();
+        } else {
+            return Optional.of(t);
+        }
     }
 
 }

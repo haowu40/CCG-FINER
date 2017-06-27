@@ -102,16 +102,16 @@ public class Entry {
 
         props.setProperty(
                 "wsd-word-embedding-file",
-                "/home/haowu4/data/autoextend/GoogleNews-vectors" +
+                "/home/haowu4/codes/CCG-FINER/data/GoogleNews-vectors" +
                         "-negative300.combined_500k.txt");
 
         props.setProperty(
                 "wsd-sense-embedding-file",
-                "/home/haowu4/data/autoextend/synset_embeddings_300.txt");
+                "/home/haowu4/codes/CCG-FINER/data/synset_embeddings_300.txt");
 
         props.setProperty(
                 "wsd-sense-mapping-file",
-                "/home/haowu4/data/autoextend/word_pos_to_synsets.txt");
+                "/home/haowu4/codes/CCG-FINER/data/word_pos_to_synsets.txt");
 
         ResourceManager resourceManager = new ResourceManager(props);
 

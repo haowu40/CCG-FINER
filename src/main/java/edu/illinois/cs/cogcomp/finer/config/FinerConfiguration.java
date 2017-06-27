@@ -1,6 +1,11 @@
 package edu.illinois.cs.cogcomp.finer.config;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -92,5 +97,12 @@ public class FinerConfiguration {
 
     public void setTypeMappingDBPath(String typeMappingDBPath) {
         this.typeMappingDBPath = typeMappingDBPath;
+    }
+
+    public static void main(String[] args) throws IOException {
+        FinerConfiguration finerConfiguration = new FinerConfiguration();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(finerConfiguration);
+//        FileUtils.write(new File("conf/finer.json"), json);
     }
 }
